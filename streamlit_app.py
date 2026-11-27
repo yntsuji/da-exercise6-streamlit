@@ -86,7 +86,6 @@ st.bar_chart(
 
 
 
-
 # Kotimaiset vs. ulkomaiset yöpymiset
 
 st.markdown("### Domestic vs Foreign hotel nights")
@@ -169,3 +168,23 @@ st.line_chart(
         "Inari Nights spent"
     ]
 )
+
+
+# Download-nappi Sodankylä vs. Inari -vertailudatalle
+
+@st.cache_data
+def convert_for_download(data):
+    return data.to_csv().encode("utf-8")
+
+csv = convert_for_download(comparison)
+
+st.download_button(
+    label="Download Sodankylä vs. Inari CSV",
+    data=csv,
+    file_name="sodankyla_vs_inari.csv",
+    mime="text/csv",
+    icon=":material/download:",
+)
+
+# Lataa vähän hassun näköistä dataa (ylimääräisen indeksin, ja toisen luvuista desimaalilla), mutta koska
+# teknisesti toimii eikä anna virheellistä dataa, en ryhdy muotoa enää siivoamaan
